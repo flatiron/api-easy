@@ -1,7 +1,7 @@
 {
   "name": "api-easy",
   "description": "Fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "author": "Charlie Robbins <charlie.robbins@gmail.com>",
   "repository": {
     "type": "git",
@@ -9,12 +9,14 @@
   },
   "keywords": ["testing", "api", "REST", "vows"],
   "dependencies": {
-    "request": ">= 1.9.0",
-    "vows": "0.5.10"
+    "request": "2.x.x",
+    "vows": "0.5.x"
   },
   "devDependencies": {
     "journey": ">= 0.4.0-pre-2",
-    "formidable": "1.0.2"
+    "formidable": "1.0.2",
+    "mkdirp": "0.2.x",
+    "wrench": "1.3.x"
   },
   "main": "./lib/api-easy",
   "scripts": { "test": "vows test/*-test.js --spec" },

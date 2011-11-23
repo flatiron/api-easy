@@ -5,14 +5,23 @@
  *
  */
 
-var vows = require('vows'),
+var path = require('path'),
+    vows = require('vows'),
     assert = require('assert'),
+    mkdirp = require('mkdirp'),
+    wrench = require("wrench"),
     APIeasy = require('../lib/api-easy'),
     helpers = require('./helpers');
 
 var scopes = ['When using the Test API', 'the Test Resource'];
 
-vows.describe('api-easy/run').addBatch({
+vows.describe('api-easy/upload').addBatch({
+  "Before tests begin": {
+    "test/uploads should be created": function () {
+      mkdirp.sync(path.join(__dirname, 'uploads'), 0777);
+    }
+  }
+}).addBatch({
   "When using a APIeasy suite": {
     "an upload test against a local test server": {
       topic: function () {
@@ -33,9 +42,9 @@ vows.describe('api-easy/run').addBatch({
         suite.use('localhost', 8080)
              .followRedirect(false)
              .setHeader("content-type", 'multipart/form-data')
-             .uploadFile('/upload', __dirname+"/file.txt", 'file')
+             .uploadFile('/upload', __dirname + "/file.txt", 'file')
                .expect(200)
-               .expect("should return file", function(err, res, body) {
+               .expect("should return file", function (err, res, body) {
                   assert.equal('TEST FILE CONTENT HERE', body);
                })
              .run(this.callback.bind(null, null));
@@ -47,6 +56,12 @@ vows.describe('api-easy/run').addBatch({
         assert.equal(results.honored, 2);
         assert.equal(results.total, 2);
       }
+    }
+  }
+}).addBatch({
+  "After tests end": {
+    "test/uploads should be deleted": function () {
+      wrench.rmdirSyncRecursive(path.join(__dirname, 'uploads'));
     }
   }
 }).export(module);

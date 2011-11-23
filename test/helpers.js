@@ -14,10 +14,10 @@ var helpers = exports,
 
 reservedOptions = {
   'length': function (batch, length) {
-    assert.length(Object.keys(batch), length);
+    assert.lengthOf(Object.keys(batch), length);
   },
   'before': function (batch, length) {
-    assert.length(Object.keys(batch.topic.before), length);
+    assert.lengthOf(Object.keys(batch.topic.before), length);
   }
 };
 
@@ -115,13 +115,13 @@ helpers.startFileEchoServer = function (port) {
     form.uploadDir = __dirname+"/uploads";
 
     form
-      .on('field', function(field, value) {
+      .on('field', function (field, value) {
         fields.push([field, value]);
       })
-      .on('file', function(field, file) {
+      .on('file', function (field, file) {
         files.push([field, file]);
       })
-      .on('end', function() {
+      .on('end', function () {
         response.writeHead(200, {'content-type': request.headers['content-type']});
         response.end(fs.readFileSync(files[0][1].path));
       });
