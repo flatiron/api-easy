@@ -9,6 +9,7 @@ var path = require('path'),
     vows = require('vows'),
     assert = require('assert'),
     mkdirp = require('mkdirp'),
+    wrench = require("wrench"),
     APIeasy = require('../lib/api-easy'),
     helpers = require('./helpers');
 
@@ -55,6 +56,12 @@ vows.describe('api-easy/upload').addBatch({
         assert.equal(results.honored, 2);
         assert.equal(results.total, 2);
       }
+    }
+  }
+}).addBatch({
+  "After tests end": {
+    "test/uploads should be deleted": function () {
+      wrench.rmdirSyncRecursive(path.join(__dirname, 'uploads'));
     }
   }
 }).export(module);
