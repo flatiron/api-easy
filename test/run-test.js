@@ -55,14 +55,21 @@ vows.describe('api-easy/run').addBatch({
              .next()
              .get('/restricted')
                .expect(200, { authorized: true })
+             .setHeader('cookie', 'a cookie value')
+             .get('/cookie')
+               .expect(200)
+               .expect('should respond with the cookie-header', function(err, res, body) {
+                 var result = JSON.parse(body);
+                 assert.equal(result.cookie, 'a cookie value');
+               })
              .run(this.callback.bind(null, null));
       },
       "should run and respond with no errors": function (ign, results) {
         assert.equal(results.errored, 0);
         assert.equal(results.broken, 0);
         assert.equal(results.pending, 0);
-        assert.equal(results.honored, 11);
-        assert.equal(results.total, 11);
+        assert.equal(results.honored, 13);
+        assert.equal(results.total, 13);
       }
     }
   }

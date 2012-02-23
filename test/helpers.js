@@ -103,6 +103,10 @@ helpers.startServer = function (port) {
   router.get('/restricted', function () {
     this.res.json(200, {}, { authorized: true });
   });
+  
+  router.get('/cookie', function() {
+    this.res.json(200, {}, {cookie: this.req.headers['cookie']});
+  });
     
   http.createServer(function (req, res) {
     req.body = '';
