@@ -1,7 +1,7 @@
 {
   "name": "api-easy",
   "description": "Fluent (i.e. chainable) syntax for generating vows tests against RESTful APIs.",
-  "version": "0.3.8",
+  "version": "0.4.0",
   "author": "Nodejitsu Inc. <info@nodejitsu.com>",
   "maintainers": [
     "indexzero <charlie@nodejitsu.com>"
@@ -19,20 +19,20 @@
   "dependencies": {
     "pkginfo": "0.3.x",
     "request": "2.x.x",
-    "vows": "0.7.x",
+    "vows": "0.8.x",
     "qs": "0.5.x"
   },
   "devDependencies": {
-    "director": "~1.0.3",
-    "formidable": "1.0.2",
-    "mkdirp": "0.2.x"
+    "director": "~1.2.8",
+    "formidable": "1.0.17",
+    "mkdirp": "0.5.x"
   },
   "main": "./lib/api-easy",
   "scripts": {
     "test": "vows test/*-test.js --spec"
   },
   "engines": {
-    "node": ">= 0.4.3"
+    "node": ">= 0.10.0"
   }
 }
 
